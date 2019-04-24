@@ -2,4 +2,4 @@
   get_url: url=https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh dest=/root/install_datadog.sh mode=0755
 
 - name: run the script
-  shell: DD_API_KEY={{ datadog_api_key }} /root/install_datadog.sh
+  shell: DD_API_KEY={{ datadog_api_key }} /root/install_datadog.sh creates=/opt/datadog-agent # noqa 305
