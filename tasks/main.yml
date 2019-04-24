@@ -3,3 +3,13 @@
 
 - name: run the script
   shell: DD_API_KEY={{ datadog_api_key }} /root/install_datadog.sh creates=/opt/datadog-agent # noqa 305
+
+- name: enable StatsD metrics collecting not only on localhost
+  lineinfile:
+    dest: /etc/datadog-agent/datadog.yaml
+    regexp: "^(#\\s+)?bind_host"
+    line: "bind_host: {{ datadog_bind_host }}"
+    state: present
+  notify:
+    - restart datadog-agent-trace
+    - restart datadog-agent
